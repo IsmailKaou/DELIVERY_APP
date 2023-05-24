@@ -1,0 +1,132 @@
+<section class="bg-gray-50">
+  <div
+    class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+  >
+    <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1
+          class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl"
+        >
+          Create a new Account
+        </h1>
+        <form
+          class="space-y-4 md:space-y-6"
+          [formGroup]="registerForm"
+          (ngSubmit)="onSubmit(registerForm.value)"
+        >
+          <div>
+            <label
+              for="firstName"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >First Name</label
+            >
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Ismail"
+              formControlName="firstName"
+            />
+          </div>
+          <div>
+            <label
+              for="lastName"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="Kaou"
+              formControlName="lastName"
+            />
+            <div
+              *ngIf=" registerForm.controls['lastName'].errors?.['required'] && (registerForm.controls['lastName'].dirty ||
+            registerForm.controls['lastName'].touched)"
+            >
+              <p class="text-xs text-red-600 px-3">
+                <span class="font-medium">Oops!</span> Please enter your
+                lastName
+              </p>
+            </div>
+          </div>
+          <div>
+            <label
+              for="email"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Email</label
+            >
+            <input
+              type="email"
+              name="email"
+              id="email"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              placeholder="name@company.com"
+              formControlName="email"
+            />
+            <div
+              *ngIf="
+                registerForm.controls['email'].invalid &&
+                (registerForm.controls['email'].dirty ||
+                  registerForm.controls['email'].touched)
+              "
+            >
+              <div *ngIf=" registerForm.controls['email'].errors?.['required']">
+                <p class="text-xs text-red-600 px-3">
+                  You forget to type your email
+                </p>
+              </div>
+
+              <div *ngIf=" registerForm.controls['email'].errors?.['email']">
+                <p class="text-xs text-red-600 px-3">This is not an email</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <label
+              for="password"
+              class="block mb-2 text-sm font-medium text-gray-900"
+              >Password</label
+            >
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="••••••••"
+              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+              formControlName="password"
+            />
+            <div
+              *ngIf=" registerForm.controls['password'].errors?.['required'] && (registerForm.controls['password'].dirty ||
+            registerForm.controls['password'].touched)"
+            >
+              <p class="text-xs text-red-600 px-3">
+                <span class="font-medium">Oops!</span> Please enter your
+                password
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center disabled:opacity-80 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed"
+            [disabled]="registerForm.invalid"
+          >
+            Sign up
+          </button>
+          <p class="text-sm font-light text-gray-500">
+            Already have an Account?
+            <a
+              routerLink="/login"
+              class="font-medium text-primary-600 hover:underline"
+              >Login</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
