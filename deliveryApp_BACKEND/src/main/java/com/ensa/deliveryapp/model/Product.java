@@ -20,7 +20,7 @@ public class Product {
     private @NotNull String name;
     private String imageURL;
     private @NotNull double price;
-    private @NotNull String description;
+    private  String description;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

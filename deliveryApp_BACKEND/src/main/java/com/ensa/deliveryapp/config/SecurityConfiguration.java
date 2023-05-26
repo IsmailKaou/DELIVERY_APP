@@ -11,6 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
@@ -29,7 +32,10 @@ public class SecurityConfiguration {
                 .disable().authorizeHttpRequests(auth -> auth
                         .requestMatchers( new AntPathRequestMatcher("/swagger-ui/**"),
                                 new AntPathRequestMatcher("/api/v1/auth/**"),
-                                new AntPathRequestMatcher("/api-docs/**")).permitAll()
+                                new AntPathRequestMatcher("/api-docs/**"),
+                                new AntPathRequestMatcher("/products/getProducts/**"),
+                                new AntPathRequestMatcher("/products/product/**")
+                                ).permitAll()
 //                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
 //                        .requestMatchers("/products/**").hasAnyRole(Role.CUSTOMER.name())
                         .anyRequest().authenticated()
@@ -41,5 +47,15 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
       return http.build();
     }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
 
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

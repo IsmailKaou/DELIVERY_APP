@@ -8,6 +8,7 @@
 
     <div
       class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
+      *ngFor="let product of products"
     >
       <div class="group relative">
         <div
@@ -22,13 +23,13 @@
         <div class="mt-4 flex gap-7 justify-between">
           <div>
             <h3 class="text-lg text-gray-700">
-              <a [routerLink]="['/products', 2]">
+              <a [routerLink]="['/products', product.id]">
                 <span aria-hidden="true" class="absolute inset-0"></span>
-                The North Face Jester Backpack
+                {{ product.name }}
               </a>
             </h3>
           </div>
-          <p class="text-lg font-medium text-gray-900">138.99$</p>
+          <p class="text-lg font-medium text-gray-900">{{ product.price }}</p>
         </div>
       </div>
 

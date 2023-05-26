@@ -10,16 +10,17 @@
           alt=""
           class="h-full w-full object-cover object-center"
         />
+        {{ product.name }}
       </div>
 
       <!-- Product info -->
 
       <div class="mt-4 lg:mt-0 col-span-2">
         <!-- Title and Price -->
-        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          The North Face Jester Backpack
-        </h1>
-        <p class="text-3xl tracking-tight text-gray-900 mt-2">$138.99</p>
+        <h1
+          class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
+        ></h1>
+        <p class="text-3xl tracking-tight text-gray-900 mt-2"></p>
 
         <!-- Description  -->
         <div class="mt-2">
@@ -27,18 +28,7 @@
 
           <div class="space-y-6">
             <p class="text-base text-gray-900">
-              PLEASE NOTE NEXT DAY DELIVERY IS NOT AVAILABLE ON PERSONALISED
-              PRODUCTS. Keep all your things safe, secure, and close by with
-              this Jester Backpack from The North Face. In a black colourway,
-              this backpack is made from durable poly to make sure your
-              essentials are protected. With a main zip compartment for easy
-              access and ample storage, this backpack has a FlexVent suspension
-              system and padded shoulder straps for a comfy and easy carry. With
-              numerous compartments inside and to the exterior of the bag, it
-              makes sure all your things are organised and easy to find. With a
-              clip to the straps and a pull string to the front for a locked-in
-              fit, this backpack is finished with whtie The North Face branding
-              to the front.
+              {{ product.description }}
             </p>
           </div>
         </div>
@@ -68,8 +58,9 @@
         <button
           routerLink="/cart"
           class="mt-12 mb-2 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+          (click)="addToCart(product.id)"
         >
-          Add to bag
+          > Add to Cart
         </button>
       </div>
     </div>

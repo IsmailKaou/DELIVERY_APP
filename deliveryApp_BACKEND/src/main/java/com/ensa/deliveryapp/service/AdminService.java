@@ -34,7 +34,7 @@ public class AdminService {
             product.setImageURL(productDto.getImageURL());
             product.setPrice(productDto.getPrice());
             product.setDescription(productDto.getDescription());
-            product.setCategory(category);
+//            product.setCategory(category);
         return productRepository.save(product);
     }
 
