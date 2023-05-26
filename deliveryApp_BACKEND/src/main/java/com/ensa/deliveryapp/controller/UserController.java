@@ -20,6 +20,7 @@ public class UserController {
     }
 
 
+
     @GetMapping({"/forAdmin"})
     @PreAuthorize("hasRole('ADMIN')")
     public String forAdmin(){

@@ -21,6 +21,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    public static String CURRENT_USER = "" ;
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
     private final CustomerRepository customerRepository;
@@ -31,12 +32,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader=request.getHeader("Authorization");
         final String jwt;
         final String email;
+
         if(authHeader==null||!authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request,response);
         return;
         }
         jwt =authHeader.substring(7);
         email=jwtService.extractUsername(jwt);
+        CURRENT_USER = email;
         if(email!=null && SecurityContextHolder.getContext().getAuthentication()==null){
 
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
