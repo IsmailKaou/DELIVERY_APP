@@ -90,5 +90,8 @@ public class CartService {
         currentUser = userRepository.findByEmail(emailCurrentUser).get();
         return cartRepository.findByUser(currentUser);
     }
+    public void clearCart(){
+        cartRepository.deleteAllByUser_Email(JwtAuthenticationFilter.CURRENT_USER);
+    }
 
 }

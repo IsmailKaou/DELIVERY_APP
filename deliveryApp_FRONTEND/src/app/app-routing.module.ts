@@ -29,7 +29,7 @@ const routes: Routes = [
     data: { roles: ['ADMIN', 'CUSTOMER'] },
   },
   {
-    path: 'trackOrder',
+    path: 'trackOrder/:orderId',
     component: TrackOrderComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ADMIN', 'CUSTOMER'] },

@@ -17,7 +17,6 @@ import java.util.List;
 
 @Service
 @Data
-
 @RequiredArgsConstructor
 public class AdminService {
     public final ProductRepository productRepository;

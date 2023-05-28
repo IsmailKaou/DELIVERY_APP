@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../_services/product.service';
+import { CheckoutService } from '../_services/checkout.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-form',
@@ -10,11 +18,47 @@ export class CheckoutFormComponent {
   cartDetails: any[] = [];
   totalCart: number = 0;
   isDataLoaded: boolean = false;
-  constructor(private productService: ProductService) {}
+
+  constructor(
+    private productService: ProductService,
+    private checkoutService: CheckoutService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
+  myForm: FormGroup;
   ngOnInit(): void {
     this.getCartDetails();
+    this.myForm = this.formBuilder.group({
+      cardNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(16),
+          Validators.maxLength(16),
+        ],
+      ],
+      cardHolder: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      expirationDate: ['', Validators.required],
+      cvv: [
+        '',
+        [Validators.required, Validators.minLength(3), Validators.maxLength(4)],
+      ],
+      billingAddress: ['', Validators.required],
+      deliveryMode: [' ', Validators.required],
+    });
   }
 
+  placeOrder() {
+    this.checkoutService.processPayment(this.myForm.value).subscribe(
+      (res) => {
+        this.router.navigate(['/trackOrder/' + res.orderId]);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
   getCartDetails() {
     this.productService.getCartDetails().subscribe(
       (res: any) => {

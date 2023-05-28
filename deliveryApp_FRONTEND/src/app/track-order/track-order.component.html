@@ -1,1 +1,58 @@
-<p>track-order works!</p>
+<div class="flex justify-center items-center h-screen">
+  <div class="w-full max-w-4xl mx-6">
+    <div
+      class="flex justify-between items-center mb-5 sm:px-10 lg:px-20 xl:px-32"
+    >
+      <div>
+        <h5 class="mb-0">
+          INVOICE <span class="text-primary font-bold">#Y34XDHR</span>
+        </h5>
+      </div>
+      <div class="text-end">
+        <p class="mb-0">
+          Expected Arrival <span>{{ expectedArrivalDate }}</span>
+        </p>
+        <p class="mb-0">
+          Tracking Number <span class="font-bold">{{ trackingNumber }}</span>
+        </p>
+      </div>
+    </div>
+
+    <ul
+      id="progressbar"
+      class="flex justify-between mx-0 mt-0 mb-5 px-0 pt-0 pb-2"
+    >
+      <li [ngClass]="{ active: currentStep >= 1 }"></li>
+      <li [ngClass]="{ active: currentStep >= 2 }"></li>
+      <li [ngClass]="{ active: currentStep >= 3 }"></li>
+      <li [ngClass]="{ active: currentStep >= 4 }"></li>
+    </ul>
+
+    <div class="flex justify-between sm:px-15 lg:px-20 xl:px-12">
+      <div class="flex items-center">
+        <i class="fas fa-clipboard-list fa-3x me-4 mb-3 mb-lg-0"></i>
+        <div>
+          <p class="font-bold mb-1">Order Processed</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <i class="fas fa-box-open fa-3x me-4 mb-3 mb-lg-0"></i>
+        <div>
+          <p class="font-bold mb-1">Order Shipped</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <i class="fas fa-shipping-fast fa-3x me-4 mb-3 mb-lg-0"></i>
+        <div>
+          <p class="font-bold mb-1">Order En Route</p>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <i class="fas fa-home fa-3x me-4 mb-3 mb-lg-0"></i>
+        <div>
+          <p class="font-bold mb-1">Order Arrived</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

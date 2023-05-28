@@ -27,10 +27,13 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.userAuthService.getToken();
 
     // if the request does not contain the no auth in header we inject the token on it
+    console.log(token);
     const req = this.addToken(request, token);
+    console.log(req);
     return next.handle(req).pipe(
       catchError((err: HttpErrorResponse) => {
         console.log(err.status);
+        console.log(err.message);
         // if the user is not logged in
         if (err.status === 401) {
           this.router.navigate(['/login']);
