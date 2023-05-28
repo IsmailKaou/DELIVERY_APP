@@ -17,6 +17,9 @@ public class Cart {
     @OneToOne
     private Product product;
 
+    private int quantity;
+    
+
     public Cart(User user, Product product) {
         this.user = user;
         this.product = product;

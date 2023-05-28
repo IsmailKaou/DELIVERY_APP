@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductService } from 'src/app/_services/product.service';
 import { OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-details',
@@ -9,9 +9,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit {
+  isDataLoaded: boolean = false;
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('id');
@@ -23,6 +25,7 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getProduct(productId).subscribe(
       (product) => {
         this.product = product;
+        this.isDataLoaded = true;
         console.log(product);
       },
       (err) => {
@@ -34,6 +37,7 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.addToCart(productId).subscribe(
       (res) => {
         console.log(res);
+        this.router.navigate(['/cart']);
       },
       (err) => {
         console.log(err);

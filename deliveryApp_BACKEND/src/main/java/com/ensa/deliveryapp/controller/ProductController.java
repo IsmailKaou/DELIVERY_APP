@@ -40,10 +40,10 @@ public class ProductController {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
     @GetMapping("/getProducts/product/{productId}")
-    public ResponseEntity<ProductDto> getProduct(@PathVariable Long productId) {
+    public ResponseEntity<Product> getProduct(@PathVariable Long productId) {
         Product product = productService.getProductById(productId);
         System.out.printf(product.getName());
         ProductDto body = productService.convertToDTO(product);
-        return new ResponseEntity<>(body, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }

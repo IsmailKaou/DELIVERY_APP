@@ -2,6 +2,7 @@
   <div class="pt-6">
     <div
       class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16"
+      *ngIf="isDataLoaded"
     >
       <!-- Image gallery -->
       <div class="sm:rounded-lg bg-black">
@@ -10,17 +11,18 @@
           alt=""
           class="h-full w-full object-cover object-center"
         />
-        {{ product.name }}
       </div>
 
       <!-- Product info -->
 
       <div class="mt-4 lg:mt-0 col-span-2">
         <!-- Title and Price -->
-        <h1
-          class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
-        ></h1>
-        <p class="text-3xl tracking-tight text-gray-900 mt-2"></p>
+        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+          {{ product.name }}
+        </h1>
+        <p class="text-3xl tracking-tight text-gray-900 mt-2">
+          ${{ product.price }}
+        </p>
 
         <!-- Description  -->
         <div class="mt-2">
@@ -56,11 +58,10 @@
         <!-- Add to Bag Form -->
 
         <button
-          routerLink="/cart"
           class="mt-12 mb-2 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
           (click)="addToCart(product.id)"
         >
-          > Add to Cart
+          Add to Cart
         </button>
       </div>
     </div>

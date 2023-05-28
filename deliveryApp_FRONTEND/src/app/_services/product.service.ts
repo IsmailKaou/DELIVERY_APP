@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
-  api = 'http://localhost:2019';
+  api = 'http://localhost:8080';
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   listProducts(): Observable<any> {
     return this.http.get(this.api + '/products/getProducts', {
@@ -24,5 +24,15 @@ export class ProductService {
   }
   addToCart(productId) {
     return this.http.get(this.api + '/addToCart/' + productId);
+  }
+  removeFromCart(productId) {
+    return this.http.get(this.api + '/removeFromCart/' + productId);
+  }
+  deleteProductFromCart(productId) {
+    return this.http.delete(this.api + '/deleteCartItem/' + productId);
+  }
+
+  getCartDetails() {
+    return this.http.get(this.api + '/getCartDetails');
   }
 }
