@@ -11,6 +11,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { AdminComponent } from './admin/admin.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { AuthGuard } from './_auth/auth.guard';
+import { OrderListComponent } from './order-list/order-list.component';
 
 const routes: Routes = [
   { path: 'products', component: HomeComponent },
@@ -29,7 +30,13 @@ const routes: Routes = [
     data: { roles: ['ADMIN', 'CUSTOMER'] },
   },
   {
-    path: 'trackOrder/:orderId',
+    path: 'orders',
+    component: OrderListComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['ADMIN', 'CUSTOMER'] },
+  },
+  {
+    path: 'orders/:orderId',
     component: TrackOrderComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ADMIN', 'CUSTOMER'] },

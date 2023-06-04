@@ -220,13 +220,6 @@
               />
             </div>
           </div>
-          <select
-            type="text"
-            name="billing-state"
-            class="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-          >
-            <option value="State">State</option>
-          </select>
           <input
             type="text"
             name="billing-zip"
@@ -239,16 +232,22 @@
         <div class="mt-6 border-t border-b py-2">
           <div class="flex items-center justify-between">
             <p class="text-sm font-medium text-gray-900">Subtotal</p>
-            <p class="font-semibold text-gray-900">$399.00</p>
+            <p class="font-semibold text-gray-900">
+              {{ totalCart | currency : "MAD" }}
+            </p>
           </div>
           <div class="flex items-center justify-between">
             <p class="text-sm font-medium text-gray-900">Shipping</p>
-            <p class="font-semibold text-gray-900">$8.00</p>
+            <p class="font-semibold text-gray-900">
+              {{ shippingPrice | currency : "MAD" }}
+            </p>
           </div>
         </div>
         <div class="mt-6 flex items-center justify-between">
           <p class="text-sm font-medium text-gray-900">Total</p>
-          <p class="text-2xl font-semibold text-gray-900">$408.00</p>
+          <p class="text-2xl font-semibold text-gray-900">
+            {{ totalCart + shippingPrice | currency : "MAD" }}
+          </p>
         </div>
       </div>
 

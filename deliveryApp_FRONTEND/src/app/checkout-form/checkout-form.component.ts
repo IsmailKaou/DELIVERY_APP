@@ -17,8 +17,8 @@ import { Router } from '@angular/router';
 export class CheckoutFormComponent {
   cartDetails: any[] = [];
   totalCart: number = 0;
+  shippingPrice: number = 10;
   isDataLoaded: boolean = false;
-
   constructor(
     private productService: ProductService,
     private checkoutService: CheckoutService,
@@ -52,7 +52,9 @@ export class CheckoutFormComponent {
   placeOrder() {
     this.checkoutService.processPayment(this.myForm.value).subscribe(
       (res) => {
-        this.router.navigate(['/trackOrder/' + res.orderId]);
+        if (res.orderStatus !== 'PROCESSING') {
+          this.router.navigate(['/orders/' + res.orderId]);
+        }
       },
       (err) => {
         console.log(err);

@@ -3,18 +3,28 @@
     <div
       class="flex justify-between items-center mb-5 sm:px-10 lg:px-20 xl:px-32"
     >
-      <div>
-        <h5 class="mb-0">
-          INVOICE <span class="text-primary font-bold">#Y34XDHR</span>
-        </h5>
-      </div>
-      <div class="text-end">
-        <p class="mb-0">
-          Expected Arrival <span>{{ expectedArrivalDate }}</span>
-        </p>
-        <p class="mb-0">
-          Tracking Number <span class="font-bold">{{ trackingNumber }}</span>
-        </p>
+      <div class="bg-white shadow-md w-full rounded-md p-10">
+        <h2 class="text-xl mb-2 font-bold">Shipment Details</h2>
+        <div class="flex flex-col space-y-2">
+          <div>
+            <span class="font-semibold">Shipping Method :</span>
+            <span class="text-gray-600">{{ order.deliveryMode }}</span>
+          </div>
+        </div>
+        <div class="text-end">
+          <p class="mb-0">
+            Expected Arrival
+            <span class="font-bold text-lg">{{
+              order.expectedArrivedDate
+            }}</span>
+          </p>
+          <p class="mb-0">
+            Total Amount
+            <span class="font-bold text-lg">{{
+              order.totalAmount | currency : "MAD" : "symbol" : "1.2-2"
+            }}</span>
+          </p>
+        </div>
       </div>
     </div>
 

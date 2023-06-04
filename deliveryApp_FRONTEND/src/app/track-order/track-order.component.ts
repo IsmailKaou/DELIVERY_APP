@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../_services/order.service';
 import { ActivatedRoute, Route } from '@angular/router';
+import { Order } from '../model/Order';
 
 @Component({
   selector: 'app-track-order',
@@ -12,6 +13,17 @@ export class TrackOrderComponent implements OnInit {
     private orderService: OrderService,
     private route: ActivatedRoute
   ) {}
+  /* Declaring a variable `order` of type `Order`. This variable is likely to be used to store the
+  order details retrieved from the `getOrderById()` method. */
+  order: Order;
+  orderStatus = {
+    PROCESSING: 1,
+    PLACED: 2,
+    SHIPPED: 3,
+    DELIVERED: 4,
+  };
+  currentStep: number | undefined;
+  //expectedArrivalDate: string = '16/05/25';
   ngOnInit(): void {
     this.getOrderById();
   }
@@ -21,14 +33,12 @@ export class TrackOrderComponent implements OnInit {
       .getOrder(this.route.snapshot.paramMap.get('orderId'))
       .subscribe(
         (order) => {
-          console.log(order);
+          this.order = order;
+          this.currentStep = this.orderStatus[this.order.orderStatus];
         },
         (err) => {
           console.log(err);
         }
       );
   }
-  currentStep: number = 4; // Set the current step based on the order's status
-  expectedArrivalDate: string = '01/12/19'; // Replace with the actual expected arrival date
-  trackingNumber: string = '234094567242423422898'; // Replace with the actual tracking number
 }

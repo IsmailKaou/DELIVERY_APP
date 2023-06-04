@@ -22,6 +22,7 @@ import { AuthInterceptor } from './_auth/auth.interceptor';
 import { AuthGuard } from './_auth/auth.guard';
 import { UserService } from './_services/user.service';
 import { TrackOrderComponent } from './track-order/track-order.component';
+import { OrderListComponent } from './order-list/order-list.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { TrackOrderComponent } from './track-order/track-order.component';
     ForbiddenComponent,
     AdminComponent,
     TrackOrderComponent,
+    OrderListComponent,
   ],
   imports: [
     BrowserModule,
