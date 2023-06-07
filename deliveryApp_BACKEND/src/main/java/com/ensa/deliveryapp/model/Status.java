@@ -1,7 +1,7 @@
 package com.ensa.deliveryapp.model;
 
 public enum Status {
-    PENDING_PAYMENT,
+    PLACED,
     PROCESSING,
     SHIPPED,
     DELIVERED,
@@ -9,4 +9,5 @@ public enum Status {
     RETURN_PENDING,
     REFUNDED,
     PENDING_REVIEW
+
 }

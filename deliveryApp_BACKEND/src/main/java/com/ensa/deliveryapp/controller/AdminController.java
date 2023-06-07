@@ -103,10 +103,10 @@ public class AdminController {
         Order updatedOrder = adminService.updateOrderStatus(orderId, status);
         return new ResponseEntity<>(updatedOrder, HttpStatus.OK);
     }
-    @GetMapping("/orders/{customerName}")
+   /* @GetMapping("/orders/{customerName}")
     public ResponseEntity<List<Order>> getOrdersByCustomer(@PathVariable String customerName) {
         List<Order> orders = adminService.getOrdersByCustomer(customerName);
         return new ResponseEntity<>(orders, HttpStatus.OK);
-    }
+    }*/
 
 }
