@@ -15,11 +15,14 @@ public class UserService {
     private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
    public void initAdminUsers(){
-       User user = new User();
-       user.setEmail("admin@admin.com");
-       user.setName("admin");
-       user.setPassword(passwordEncoder.encode("admin"));
-       user.setRole(Role.ADMIN);
-       userRepository.save(user);
-   }
+
+       var user = userRepository.findByRole(Role.ADMIN);
+       if(!user.isPresent()){
+           User admin=new User();
+           admin.setEmail("admin@admin.com");
+           admin.setName("admin");
+           admin.setPassword(passwordEncoder.encode("admin"));
+           admin.setRole(Role.ADMIN);
+       userRepository.save(admin);
+   }}
 }
