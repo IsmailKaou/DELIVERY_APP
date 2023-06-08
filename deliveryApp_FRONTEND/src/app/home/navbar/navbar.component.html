@@ -8,8 +8,8 @@
         <a
           class="text-gray-800 text-xl font-bold md:text-2xl hover:text-gray-700"
           routerLink="/"
-          >LOGO</a
-        >
+          >Peak<span class="font-bold text-[#ff3366]">Pack</span>
+        </a>
       </div>
 
       <div *ngIf="userService.roleMatch(['ADMIN']) && isLoggedIn()">
@@ -17,13 +17,6 @@
           class="my-3 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
           routerLink="/admin"
           >Admin dashboard</a
-        >
-      </div>
-      <div *ngIf="userService.roleMatch(['ADMIN', 'CUSTOMER']) && isLoggedIn()">
-        <a
-          class="my-3 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
-          routerLink="/orders"
-          >Track my Order</a
         >
       </div>
 
@@ -80,8 +73,17 @@
           *ngIf="!isLoggedIn()"
           >Register</a
         >
+        <div
+          *ngIf="userService.roleMatch(['ADMIN', 'CUSTOMER']) && isLoggedIn()"
+        >
+          <a
+            class="my-3 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+            routerLink="/orders"
+            >Orders</a
+          >
+        </div>
         <a
-          class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0"
+          class="my-1 text-sm text-gray-700 font-medium hover:text-indigo-500 md:mx-4 md:my-0 cursor-pointer"
           (click)="logout()"
           *ngIf="isLoggedIn()"
           >Logout</a

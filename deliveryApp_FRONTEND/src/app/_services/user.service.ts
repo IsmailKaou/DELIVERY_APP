@@ -10,7 +10,7 @@ export class UserService {
     private http: HttpClient,
     private userAuthService: UsreAuthService
   ) {}
-  api = 'http://localhost:8080';
+  api = 'http://localhost:2000';
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
   public login(loginData) {

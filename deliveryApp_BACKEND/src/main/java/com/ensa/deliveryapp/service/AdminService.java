@@ -27,13 +27,13 @@ public class AdminService {
 
     public Product createProduct(ProductDto productDto) {
         // Check if the category exists
-        Category category = categoryRepository.findByName(productDto.getCategory()).orElseThrow(() -> new IllegalArgumentException("Catgory not found"));
+//        Category category = categoryRepository.findByName(productDto.getCategory()).orElseThrow(() -> new IllegalArgumentException("Catgory not found"));
         Product product = new Product();
             product.setName(productDto.getName());
             product.setImageURL(productDto.getImageURL());
             product.setPrice(productDto.getPrice());
             product.setDescription(productDto.getDescription());
-//            product.setCategory(category);
+          product.setCategory(categoryRepository.findById(1l).get());
         return productRepository.save(product);
     }
 
@@ -51,12 +51,12 @@ public class AdminService {
                 .orElseThrow(() -> new IllegalArgumentException("Product not found"));
 
         // Check if the category exists
-        var category = categoryRepository.findByName(productDto.getCategory()).orElseThrow(() -> new IllegalArgumentException("Category not found"));
+       // var category = categoryRepository.findByName(productDto.getCategory()).orElseThrow(() -> new IllegalArgumentException("Category not found"));
             product.setName(productDto.getName());
             product.setImageURL(productDto.getImageURL());
             product.setPrice(productDto.getPrice());
             product.setDescription(productDto.getDescription());
-            product.setCategory(category);
+           // product.setCategory(category);
         return productRepository.save(product);
     }
 

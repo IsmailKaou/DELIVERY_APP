@@ -17,6 +17,7 @@ export class OrderListComponent implements OnInit {
   showOrderLine(orderId) {
     this.router.navigate(['/orders/' + orderId]);
   }
+  noOrders: 'No orders';
 
   listOrders() {
     this.orderService.getOrders().subscribe(

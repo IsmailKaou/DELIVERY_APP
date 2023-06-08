@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +23,10 @@ import { AuthGuard } from './_auth/auth.guard';
 import { UserService } from './_services/user.service';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { DeleteDialogComponent } from './admin/delete-dialog/delete-dialog.component';
+import { UpdateProductComponent } from './admin/update-product/update-product.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,13 +45,18 @@ import { OrderListComponent } from './order-list/order-list.component';
     AdminComponent,
     TrackOrderComponent,
     OrderListComponent,
+    DeleteDialogComponent,
+    UpdateProductComponent,
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    MatDialogModule,
   ],
   providers: [
     AuthGuard,
