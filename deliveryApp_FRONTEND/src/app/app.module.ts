@@ -23,6 +23,10 @@ import { AuthGuard } from './_auth/auth.guard';
 import { UserService } from './_services/user.service';
 import { TrackOrderComponent } from './track-order/track-order.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { DeleteDialogComponent } from './admin/delete-dialog/delete-dialog.component';
+import { UpdateProductComponent } from './admin/update-product/update-product.component';
+import { AddProductComponent } from './admin/add-product/add-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,9 @@ import { OrderListComponent } from './order-list/order-list.component';
     AdminComponent,
     TrackOrderComponent,
     OrderListComponent,
+    DeleteDialogComponent,
+    UpdateProductComponent,
+    AddProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +55,8 @@ import { OrderListComponent } from './order-list/order-list.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    MatDialogModule
+
   ],
   providers: [
     AuthGuard,

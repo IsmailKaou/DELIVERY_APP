@@ -1,0 +1,44 @@
+
+  <div class="fixed inset-0 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow">       
+          <div class="relative bg-white rounded-lg shadow ">
+              <button type="button" (click)=" onCancel()" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center " data-modal-hide="authentication-modal">
+                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+              <div class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-xl font-medium text-gray-900 ">Add product</h3>
+                  <form [formGroup]="form" (ngSubmit)="submit(form.value)" class="space-y-6" action="#">
+                      <div>
+                          <label  class="block mb-2 text-sm font-medium text-gray-900 ">Product name</label>
+                          <input formControlName="productName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+                      </div>
+                      
+                      <div>
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 ">Product image</label>
+                        <input formControlName="productImage" type="file"
+                        (change)="onFileSelected($event)"
+                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-lg file:border-0
+                        file:text-sm 
+                        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required>
+                    </div>
+         
+                    <div>
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 ">Product description</label>
+                        <textarea type="text" height="50" formControlName="productDescription"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" height="50" required></textarea>
+                    </div>
+                      <div>
+                        <label  class="block mb-2 text-sm font-medium text-gray-900 ">Product price</label>
+                        <input formControlName="productPrice" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  " required>
+                    </div>
+     
+                      <button type="submit"  class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Add product</button>
+ 
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div> 
+ 
