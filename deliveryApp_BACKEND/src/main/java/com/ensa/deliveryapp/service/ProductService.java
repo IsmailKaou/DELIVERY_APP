@@ -41,7 +41,7 @@ public class ProductService {
         productDTO.setName(product.getName());
         productDTO.setPrice(productDTO.getPrice());
         productDTO.setDescription(product.getDescription());
-        productDTO.setCategory(product.getCategory().getName());
+       // productDTO.setCategory(product.getCategory().getName());
 
         return productDTO;
     }
@@ -55,6 +55,19 @@ public class ProductService {
         categoryRepository.save(category);
 
 
+        String [] productImages={
+                "product1.jpeg",
+                "product2.jpeg",
+                "product3.jpeg",
+                "product4.jpeg",
+                "product5.jpeg",
+                "product6.jpeg",
+                "product.jpg",
+                "backpack.jpg",
+                "product1.jpeg",
+                "product2.jpeg",
+
+        };
         String[] productNames = {
                 "Backpack",
                 "Travel Bag",
@@ -99,6 +112,7 @@ public class ProductService {
             Product product = new Product();
             product.setCategory(categoryRepository.findById(1L).get());
             product.setId(i);
+            product.setImageURL(productImages[i-1]);
             product.setName(productNames[i - 1]);
             product.setDescription(productDescriptions[i - 1]);
             product.setPrice(productPrices[i - 1]);

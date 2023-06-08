@@ -1,27 +1,61 @@
-<div class="bg-white shadow-md rounded-lg">
-  <h2 class="text-xl font-semibold bg-gray-100 p-4">Orders</h2>
+<div
+  class="rounded-lg container mx-auto px-6 py-3 md:flex md:justify-between md:items-center"
+>
+  <h3 class="text-3xl font-bold py-2 px-2">Order History</h3>
+  <div class="flex justify-center" *ngIf="!orders">
+    <div class="text-center py-4 lg:px-4">
+      <div
+        class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex"
+        role="alert"
+      >
+        <span
+          class="flex rounded-full bg-indigo-500 uppercase px-2 py-1 text-xs font-bold mr-3"
+          >Oops</span
+        >
+        <span class="font-semibold mr-2 text-left flex-auto"
+          >We found no orders in your account</span
+        >
+        <svg
+          class="fill-current opacity-75 h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M12.95 10.707l.707-.707L8 4.343 6.586 5.757 10.828 10l-4.242 4.243L8 15.657l4.95-4.95z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
 
-  <ul class="divide-y divide-gray-200">
-    <!-- Repeat this list item for each order -->
-    <li *ngFor="let order of orders" class="p-4">
-      <div class="flex justify-between items-center mb-2">
-        <span class="font-semibold">Order Date:</span>
-        <span class="text-gray-600">{{ order.dateCreated }}</span>
-      </div>
-      <div class="flex justify-between items-center mb-2">
-        <span class="font-semibold">Expected Arrival:</span>
-        <span class="text-gray-600">{{ order.expectedArrivedDate }}</span>
-      </div>
-      <div class="flex justify-between items-center mb-2">
-        <span class="font-semibold">Status:</span>
-        <span class="text-gray-600">{{ order.orderStatus }}</span>
-      </div>
-      <div class="flex justify-between items-center">
-        <span class="font-semibold">Total Amount:</span>
-        <span class="text-gray-600">
-          {{ order.totalAmount | currency : "MAD" : "symbol" : "1.2-2" }}
-        </span>
-      </div>
-    </li>
-  </ul>
+  <ng-container *ngIf="orders && orders.length > 0">
+    <ul class="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+      <li *ngFor="let order of orders" class="py-3 sm:py-4">
+        <div class="flex items-center space-x-4">
+          <div class="flex-shrink-0">
+            <img
+              class="w-8 h-8 rounded-full"
+              src="/docs/images/people/profile-picture-1.jpg"
+              alt="Neil image"
+            />
+          </div>
+          <div class="flex-1 min-w-0">
+            <p
+              class="text-sm font-medium text-gray-900 truncate dark:text-white"
+            >
+              {{ order.expectedArrivedDate }}
+            </p>
+            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+              {{ order.orderStatus }}
+            </p>
+          </div>
+          <div
+            class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"
+          >
+            {{ order.totalAmount | currency : "MAD" : "symbol" : "1.2-2" }}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </ng-container>
 </div>

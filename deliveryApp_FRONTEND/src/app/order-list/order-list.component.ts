@@ -13,6 +13,7 @@ export class OrderListComponent implements OnInit {
     this.listOrders();
   }
   orders: Order[];
+  noOrders: 'No orders';
 
   listOrders() {
     this.orderService.getOrders().subscribe(

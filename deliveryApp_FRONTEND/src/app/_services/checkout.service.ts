@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CheckoutService {
   constructor(private http: HttpClient) {}
-  api = 'http://localhost:8080/orders';
+  api = 'http://localhost:2000/orders';
   processPayment(paymentData): Observable<any> {
     console.log(paymentData);
     return this.http.post(this.api + '/checkout', paymentData);
