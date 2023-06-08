@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent {
   loginForm: FormGroup;
+  error: string = '';
   constructor(
     private builder: FormBuilder,
     private userService: UserService,
@@ -29,6 +30,7 @@ export class LoginFormComponent {
     });
   }
   onSubmit(FormData: any) {
+    this.error = '';
     this.userService.login(this.loginForm.value).subscribe(
       (res) => {
         // console.log(res);
@@ -44,6 +46,7 @@ export class LoginFormComponent {
       },
       (err) => {
         console.log(err);
+        this.error = 'Verify your credentials and try again';
       }
     );
   }

@@ -24,4 +24,7 @@ public class BankAccount {
     private double balance;
     @Column(name = "card_number")
     private String cardNumber;
+
+    private String cardCVV;
+    private String cardDate;
 }

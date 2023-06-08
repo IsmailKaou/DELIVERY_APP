@@ -17,8 +17,9 @@ import { Router } from '@angular/router';
 export class CheckoutFormComponent {
   cartDetails: any[] = [];
   totalCart: number = 0;
-  shippingPrice: number = 10;
+  shippingPrice: number;
   isDataLoaded: boolean = false;
+  deliveryModeT;
   constructor(
     private productService: ProductService,
     private checkoutService: CheckoutService,
@@ -47,6 +48,11 @@ export class CheckoutFormComponent {
       billingAddress: ['', Validators.required],
       deliveryMode: [' ', Validators.required],
     });
+    // console.log(this.deliveryModeT);
+  }
+  onChange(e) {
+    // console.log(e.target.value);
+    this.shippingPrice = e.target.value == 'Express' ? 59 : 15;
   }
 
   placeOrder() {

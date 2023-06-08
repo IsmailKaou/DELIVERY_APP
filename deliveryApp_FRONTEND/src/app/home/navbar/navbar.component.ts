@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ProductService } from 'src/app/_services/product.service';
 import { UserService } from 'src/app/_services/user.service';
 import { UsreAuthService } from 'src/app/_services/usre-auth.service';
 
@@ -12,8 +13,10 @@ export class NavbarComponent {
   constructor(
     private userAuthService: UsreAuthService,
     private router: Router,
-    public userService: UserService
+    public userService: UserService,
+    private productService: ProductService
   ) {}
+
   public isLoggedIn() {
     return this.userAuthService.isLoggedIn();
   }
