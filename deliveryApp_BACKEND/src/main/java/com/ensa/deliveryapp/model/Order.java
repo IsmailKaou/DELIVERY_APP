@@ -25,13 +25,18 @@ public class Order {
     private @NotNull User user;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private @NotNull LocalDate dateCreated;
+    private @NotNull LocalDate expectedArrivedDate;
     private String orderStatus;
     private @NotNull double totalAmount;
-
+    @JsonIgnore
     private String cardNumber;
+    @JsonIgnore
     private String cardHolder;
+    @JsonIgnore
     private String email;
+    @JsonIgnore
     private String expirationDate;
+    @JsonIgnore
     private String cvv;
     private String billingAddress;
     private String deliveryMode;

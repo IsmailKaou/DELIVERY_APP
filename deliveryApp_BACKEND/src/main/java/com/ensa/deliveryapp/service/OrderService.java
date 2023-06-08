@@ -21,6 +21,7 @@ public class OrderService {
     private final CartService cartService;
     private final CustomerRepository customerRepository;
     private final OrderRepository orderRepository;
+    private final BankAccountService bankAccountService;
     public Order getOrder(Long id){
         return orderRepository.findById(id).get();
     }
@@ -34,20 +35,25 @@ public class OrderService {
     // get current user
     User user = customerRepository.findByEmail(JwtAuthenticationFilter.CURRENT_USER).get();
         System.out.printf(user.getName());
-
+double totalAmount = calculateTotalAmount(cartList);
     // build an order
 Order order = Order.builder().user(user).
             products(getCartProducts(cartList))
-            .orderStatus(Status.PENDING_PAYMENT.name())
+            .orderStatus(Status.PROCESSING.name())
             .dateCreated(LocalDate.now())
-            .totalAmount(calculateTotalAmount(cartList))
+        .expectedArrivedDate(LocalDate.now().plusDays(30))
+            .totalAmount(totalAmount)
         .email(paymentRequest.getEmail())
+        .deliveryMode(paymentRequest.getDeliveryMode())
         .cardHolder(paymentRequest.getCardHolder())
             .build();
     // save order to database
-        String message = processPayment(paymentRequest);
-        orderRepository.save(order);
-       cartService.clearCart();
+       if(bankAccountService.processPayment(paymentRequest.getCardNumber(),totalAmount)!=null) {
+           order.setOrderStatus(Status.PLACED.name());
+           orderRepository.save(order);
+           cartService.clearCart();
+       }
+
         return order;
     }
     private double calculateTotalAmount(List<Cart> cartList){
@@ -57,14 +63,17 @@ Order order = Order.builder().user(user).
         }
         return totalAmount;
     }
-    private String processPayment(PaymentRequest paymentRequest){
-        return "Your order has been shipped to "+paymentRequest.getBillingAddress();
-    }
+
     private List<Product> getCartProducts(List<Cart> cartList){
         List<Product> products = new ArrayList<>();
         for(Cart cart:cartList) {
             products.add(cart.getProduct());
         }
         return products;
+    }
+
+    public List<Order> getOrders() {
+        User user = customerRepository.findByEmail(JwtAuthenticationFilter.CURRENT_USER).get();
+        return orderRepository.findByUser(user).get();
     }
 }

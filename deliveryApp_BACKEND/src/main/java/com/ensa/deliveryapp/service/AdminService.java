@@ -102,9 +102,9 @@ public class AdminService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
-    public List<Order> getOrdersByCustomer(String customerName) {
+    /*public List<Order> getOrdersByCustomer(String customerName) {
         return orderRepository.findByUser_Name(customerName).orElseThrow(()->new IllegalArgumentException("Customer not found"));
-    }
+    }*/
 
     public Order getOrderById(Long orderId) {
         return orderRepository.findById(orderId)
