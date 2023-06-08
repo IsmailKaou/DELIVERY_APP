@@ -56,49 +56,50 @@ public class ProductService {
 
 
         String[] productNames = {
-                "Backpack",
-                "Travel Bag",
-                "Hiking Pack",
-                "Daypack",
-                "Laptop Bag",
-                "Duffel Bag",
-                "Tote Bag",
-                "Messenger Bag",
-                "Rolling Backpack",
-                "Hydration Pack"
+                "Recon Backpack",
+                "Surge Backpack",
+                "Router Backpack",
+                "Borealis Backpack",
+                "Base Camp Voyager Travel Pack—S",
+                "Base Camp Voyager Travel Pack—L",
+                "Mountain Daypack—S",
+                "Base Camp Voyager Sling",
+                "Jester Backpack",
+                "Mountain Daypack—L"
         };
 
         String[] productDescriptions = {
-                "Ideal for outdoor adventures and camping trips. This backpack is made with durable materials and features multiple compartments for easy organization.",
-                "A versatile travel bag that's perfect for your next trip. It offers ample storage space, a comfortable design, and convenient features like a built-in USB charger.",
-                "Designed for hiking enthusiasts, this hiking pack is lightweight yet sturdy. It features a suspension system for added comfort and plenty of storage options.",
-                "A reliable daypack that's suitable for everyday use. It has a sleek design, padded shoulder straps, and a dedicated laptop compartment.",
-                "Keep your laptop safe and secure with this stylish laptop bag. It offers padded protection, multiple pockets, and a comfortable carrying handle.",
-                "A spacious duffel bag that's great for gym sessions or weekend getaways. It has a sturdy construction, multiple compartments, and a detachable shoulder strap.",
-                "Carry your essentials in style with this trendy tote bag. It's made with high-quality materials, features a spacious interior, and has convenient storage pockets.",
-                "Stay organized on the go with this functional messenger bag. It has multiple compartments, a padded laptop sleeve, and an adjustable shoulder strap.",
-                "Get ready for your next adventure with this rolling backpack. It combines the convenience of a backpack with the ease of mobility provided by wheels.",
-                "Stay hydrated during your outdoor activities with this hydration pack. It features a built-in water reservoir, adjustable straps, and a lightweight design."
+                "An icon reimagined, the Recon excels as a daypack with its large mesh storage pocket, and daisy-chain attachment points.",
+                "With a 31-liter capacity, the Surge Backpack is a spacious, streamlined pack you can take almost anywhere. Clever design features like a water-repellent finish, 15'' laptop sleeve, and the ability to stand unsupported make it indispensable.",
+                "The Router, our largest lifestyle pack, has a 40-liter capacity, is water-repellent, and can fit laptops up to 17''. It also has a sought-after endorsement from the American Chiropractic Association.",
+                "The classic Borealis Backpack is a best-seller for good reason. With its iconic bungee cord system and large interior compartment, you can keep your items secure, inside and out. This go-anywhere pack also features a stand-up design, sternum strap, removable waist belt and protective laptop compartment.",
+                "A new addition to our fan-favorite Base Camp Voyager line. The Base Camp Voyager Travel Pack—S is ideal for a weekend away or as your everyday travel bag. Made using water- and abrasion-resistant  fabrics, this 26-liter pack features a large main compartment to help you fit clothing, footwear, gear or other important items.",
+                "A new addition to our fan-favorite Base Camp Voyager line. The Base Camp Voyager Travel Pack—L is ideal for a weekend away or as your everyday travel bag. Made using water- and abrasion-resistant  fabrics, this 35-liter pack has a dividable main compartment to help you organize clothing, footwear, gear and other important items.",
+                "The 18-liter Mountain Daypack—S combines modern organization with a retro design inspired by the earliest days of The North Face®. This water-repellent pack features a recycled body fabric and a padded sleeve for laptops up to 13''.",
+                "Part of our Base Camp Voyager Collection, this sling is perfect for your summer travels or around-town commutes. Featuring a padded tablet pocket, reflective detailing, stabilizer strap, and fully recycled fabrics, this bag is easy to carry and easier on the planet.",
+                "GPart of our Base Camp Voyager Collection, this sling is perfect for your summer travels or around-town commutes. Featuring a padded tablet pocket, reflective detailing, stabilizer strap, and fully recycled fabrics, this bag is easy to carry and easier on the planet.",
+                "The 20-liter Mountain Daypack—L combines modern organization with a retro design inspired by the earliest days of The North Face®. This water-repellent pack features a recycled body fabric and a padded sleeve for laptops up to 13''."
         };
 
 
         double[] productPrices = {
-                49.99,
-                79.99,
-                109.99,
-                39.99,
-                59.99,
-                69.99,
-                29.99,
-                44.99,
-                89.99,
-                54.99
+                109.00,
+                139.00,
+                159.99,
+                259.99,
+                189.99,
+                139.99,
+                149.99,
+                112.00,
+                129.00,
+                189.00
         };
 
         for (int i = 1; i <= 10; i++) {
             Product product = new Product();
             product.setCategory(categoryRepository.findById(1L).get());
             product.setId(i);
+            product.setImageURL(productNames[i - 1]);
             product.setName(productNames[i - 1]);
             product.setDescription(productDescriptions[i - 1]);
             product.setPrice(productPrices[i - 1]);

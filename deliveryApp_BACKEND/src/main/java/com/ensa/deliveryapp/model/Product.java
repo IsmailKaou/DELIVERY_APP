@@ -20,6 +20,7 @@ public class Product {
     private @NotNull String name;
     private String imageURL;
     private @NotNull double price;
+    @Column(length = 3000)
     private  String description;
 
     @JsonIgnore

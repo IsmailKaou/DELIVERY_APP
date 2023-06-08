@@ -17,8 +17,8 @@ export class TrackOrderComponent implements OnInit {
   order details retrieved from the `getOrderById()` method. */
   order: Order;
   orderStatus = {
-    PROCESSING: 1,
-    PLACED: 2,
+    PENDING: 1,
+    PROCESSING: 2,
     SHIPPED: 3,
     DELIVERED: 4,
   };
@@ -33,6 +33,9 @@ export class TrackOrderComponent implements OnInit {
       .getOrder(this.route.snapshot.paramMap.get('orderId'))
       .subscribe(
         (order) => {
+          console.log(order);
+          console.log(order.deliveryMode);
+
           this.order = order;
           this.currentStep = this.orderStatus[this.order.orderStatus];
         },

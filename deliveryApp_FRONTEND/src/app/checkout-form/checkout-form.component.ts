@@ -52,9 +52,7 @@ export class CheckoutFormComponent {
   placeOrder() {
     this.checkoutService.processPayment(this.myForm.value).subscribe(
       (res) => {
-        if (res.orderStatus !== 'PROCESSING') {
-          this.router.navigate(['/orders/' + res.orderId]);
-        }
+        this.router.navigate(['/orders/' + res.orderId]);
       },
       (err) => {
         console.log(err);
