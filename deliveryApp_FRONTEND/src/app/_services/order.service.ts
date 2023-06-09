@@ -8,7 +8,7 @@ import { Order } from '../model/Order';
 })
 export class OrderService {
   constructor(private http: HttpClient) {}
-  api = 'https://deliveryapp-production-4114.up.railway.app/orders';
+  api = 'https://deliveryapp-production-c42f.up.railway.app/orders';
   getOrder(orderId: string): Observable<Order> {
     return this.http.get<Order>(this.api + '/' + orderId);
   }

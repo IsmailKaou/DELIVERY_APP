@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CheckoutService {
   constructor(private http: HttpClient) {}
-  api = 'https://deliveryapp-production-4114.up.railway.app/orders';
+  api = 'https://deliveryapp-production-c42f.up.railway.app/orders';
   processPayment(paymentData): Observable<any> {
     console.log(paymentData);
     return this.http.post(this.api + '/checkout', paymentData);

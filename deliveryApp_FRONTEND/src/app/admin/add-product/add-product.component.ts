@@ -81,7 +81,7 @@ export class AddProductComponent {
 
       this.http
         .post(
-          'https://deliveryapp-production-4114.up.railway.app/upload',
+          'https://deliveryapp-production-c42f.up.railway.app/upload',
           formData,
           {
             responseType: 'text',

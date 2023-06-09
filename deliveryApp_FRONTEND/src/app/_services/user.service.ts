@@ -10,7 +10,7 @@ export class UserService {
     private http: HttpClient,
     private userAuthService: UsreAuthService
   ) {}
-  api = 'https://deliveryapp-production-4114.up.railway.app';
+  api = 'https://deliveryapp-production-c42f.up.railway.app';
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
 
   public login(loginData) {
