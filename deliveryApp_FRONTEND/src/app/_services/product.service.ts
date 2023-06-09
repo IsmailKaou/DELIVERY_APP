@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
+
   api = 'http://localhost:2000';
+  cartDetails: any[] = [];
+  public emptyCart = true;
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });
   listProducts(): Observable<any> {
     return this.http.get(this.api + '/products/getProducts', {
@@ -15,10 +18,6 @@ export class ProductService {
     });
   }
   addProduct(product) {
-    const token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE2ODYyMTAwNDMsImV4cCI6MTY4NjIxMTQ4M30.-LD5mxw_jy98SwBBflu4A2xnxdWKTXr_Naw0Eya9pi4';
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
     return this.http.post(this.api + '/admin/products', product);
   }
   getProduct(productId) {
@@ -47,6 +46,7 @@ export class ProductService {
   }
 
   getCartDetails() {
+    this.emptyCart = false;
     return this.http.get(this.api + '/getCartDetails');
   }
 }

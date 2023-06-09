@@ -8,6 +8,11 @@
     <ul class="divide-y divide-gray-200">
       <!-- Repeat this list item for each order -->
       <li *ngFor="let order of orders" class="p-4">
+        <a
+          class="py-4 cursor-pointer text-lg text-indigo-500 font-medium hover:text-indigo-500 md:my-0"
+          (click)="showOrderLine(order.orderId)"
+          >View Order Status</a
+        >
         <div class="flex justify-between items-center mb-2">
           <span class="font-semibold">Order Date:</span>
           <span class="text-gray-600">{{ order.dateCreated }}</span>

@@ -6,6 +6,7 @@ import com.ensa.deliveryapp.repository.CustomerRepository;
 import com.ensa.deliveryapp.repository.OrderRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,33 +29,32 @@ public class OrderService {
     @Transactional
     public Order placeOrder(PaymentRequest paymentRequest){
         // get cart list
-    List<Cart> cartList = cartService.getCartDetails();
+            List<Cart> cartList = cartService.getCartDetails();
 
-    if(cartList.isEmpty())
-        return null;
-    // get current user
-    User user = customerRepository.findByEmail(JwtAuthenticationFilter.CURRENT_USER).get();
-        System.out.printf(user.getName());
-double totalAmount = calculateTotalAmount(cartList);
-    // build an order
-Order order = Order.builder().user(user).
-            products(getCartProducts(cartList))
-            .orderStatus(Status.PROCESSING.name())
-            .dateCreated(LocalDate.now())
-        .expectedArrivedDate(LocalDate.now().plusDays(30))
-            .totalAmount(totalAmount)
-        .email(paymentRequest.getEmail())
-        .deliveryMode(paymentRequest.getDeliveryMode())
-        .cardHolder(paymentRequest.getCardHolder())
-            .build();
-    // save order to database
-       if(bankAccountService.processPayment(paymentRequest.getCardNumber(),totalAmount)!=null) {
-           order.setOrderStatus(Status.PLACED.name());
-           orderRepository.save(order);
-           cartService.clearCart();
-       }
+            if(cartList.isEmpty())
+                return null;
+            // get current user
+            User user = customerRepository.findByEmail(JwtAuthenticationFilter.CURRENT_USER).get();
+                System.out.printf(user.getName());
+            double totalAmount = calculateTotalAmount(cartList);
+            // build an order
+            Order order = Order.builder().user(user).
+                        products(getCartProducts(cartList))
+                        .orderStatus(Status.PENDING.name())
+                        .dateCreated(LocalDate.now())
+                    .expectedArrivedDate(LocalDate.now().plusDays(paymentRequest.getDeliveryMode().equals("Express")? 2 : 25))
+                        .totalAmount(totalAmount)
+                    .email(paymentRequest.getEmail())
+                    .deliveryMode(paymentRequest.getDeliveryMode())
+                    .cardHolder(paymentRequest.getCardHolder())
+                        .build();
+            // save order to database
+               if(bankAccountService.processPayment(paymentRequest.getCardNumber(),totalAmount)!=null) {
+                   orderRepository.save(order);
+                   cartService.clearCart();
+               }
 
-        return order;
+                return order;
     }
     private double calculateTotalAmount(List<Cart> cartList){
         double totalAmount=0;
@@ -76,4 +76,36 @@ Order order = Order.builder().user(user).
         User user = customerRepository.findByEmail(JwtAuthenticationFilter.CURRENT_USER).get();
         return orderRepository.findByUser(user).get();
     }
+
+    @Scheduled(cron = "0 0 0 */2 * *")
+    public void updateOrderStatus(){
+        List<Order> orders = orderRepository.findAll();
+        for (Order order: orders
+             ) {
+            if (order.getOrderStatus().equals("PENDING")) order.setOrderStatus("PROCESSING");
+            else if (order.getOrderStatus().equals("PROCESSING")) {
+                order.setOrderStatus("SHIPPED");
+            }else continue;
+        }
+        orderRepository.saveAll(orders);
+    }
+    @Scheduled(fixedRate = 24 * 60 * 60 * 1000) // Run the job once every 24 hours
+    public void updateOrderStatusToDelivred() {
+        // Retrieve orders with "Shipping" status from the repository or service
+        List<Order> orders = orderRepository.findByOrderStatus("SHIPPED").get();
+
+        LocalDate currentDate = LocalDate.now();
+
+        for (Order order : orders) {
+            LocalDate expectedArrivedDate = order.getExpectedArrivedDate();
+
+            if (currentDate.isAfter(expectedArrivedDate)) {
+                System.out.println("product delivred");
+                order.setOrderStatus("Delivered");
+            }
+        }
+        orderRepository.saveAll(orders);
+    }
+
+
 }

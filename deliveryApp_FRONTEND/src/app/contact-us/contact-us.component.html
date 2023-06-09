@@ -8,7 +8,11 @@
     Got a technical issue? Want to send feedback about a beta feature? Need
     details about our Business plan? Let us know.
   </p>
-  <form action="#" class="space-y-8">
+  <form
+    [formGroup]="contactForm"
+    class="space-y-8"
+    (ngSubmit)="onSubmit(contactForm.value)"
+  >
     <div>
       <label for="email" class="block mb-2 text-sm font-medium text-gray-900"
         >Your email</label
@@ -17,9 +21,26 @@
         type="email"
         id="email"
         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
-        placeholder="name@flowbite.com"
-        required
+        placeholder="name@example.com"
+        name="email"
+        formControlName="email"
       />
+      <div
+        class="help is-error text-xs text-red p-2"
+        *ngIf="
+                  contactForm.controls['email']?.errors?.['required'] && contactForm.get('email')?.touched
+                "
+      >
+        Your email is required
+      </div>
+      <div
+        class="help is-error text-xs text-red p-2"
+        *ngIf="
+                  contactForm.controls['email']?.errors?.['email'] && contactForm.get('email')?.touched
+                "
+      >
+        Please enter a valid email address
+      </div>
     </div>
     <div>
       <label for="subject" class="block mb-2 text-sm font-medium text-gray-900"
@@ -30,8 +51,17 @@
         id="subject"
         class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500"
         placeholder="Let us know how we can help you"
-        required
+        name="subject"
+        formControlName="subject"
       />
+      <div
+        class="help is-error text-xs text-red p-2"
+        *ngIf="
+                  contactForm.controls['subject']?.errors?.['required'] && contactForm.get('subject')?.touched
+                "
+      >
+        Enter a Subject
+      </div>
     </div>
     <div class="sm:col-span-2">
       <label for="message" class="block mb-2 text-sm font-medium text-gray-900"
@@ -42,11 +72,21 @@
         rows="6"
         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
         placeholder="Leave a comment..."
+        formControlName="body"
       ></textarea>
+      <div
+        class="help is-error text-xs text-red p-2"
+        *ngIf="
+                  contactForm.controls['body']?.errors?.['required'] && contactForm.get('body')?.touched
+                "
+      >
+        Please type a message to send!
+      </div>
     </div>
     <button
+      [disabled]="!contactForm.valid"
       type="submit"
-      class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-indigo-600 sm:w-fit hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-primary-300"
+      class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-indigo-600 disabled:bg-indigo-400 sm:w-fit hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-primary-300"
     >
       Send message
     </button>

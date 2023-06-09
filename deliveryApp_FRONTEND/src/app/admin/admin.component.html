@@ -69,7 +69,9 @@
                   <div class="inline-flex items-center gap-x-1">
                     <div>
                       <img
-                        src="../../assets/{{ product.imageURL }}"
+                        [src]="
+                          '../../../assets/products/' + product.name + '.jpeg'
+                        "
                         class="rounded-lg"
                         alt="product"
                         width="70"
