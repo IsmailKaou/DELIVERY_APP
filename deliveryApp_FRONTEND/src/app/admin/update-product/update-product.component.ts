@@ -95,9 +95,13 @@ export class UpdateProductComponent {
       formData.append('image', this.selectedFile, this.selectedFile.name);
 
       this.http
-        .post('http://localhost:2000/upload', formData, {
-          responseType: 'text',
-        })
+        .post(
+          'https://deliveryapp-production-4114.up.railway.app/upload',
+          formData,
+          {
+            responseType: 'text',
+          }
+        )
         .subscribe(
           (response) => {
             this.productImage = response;
