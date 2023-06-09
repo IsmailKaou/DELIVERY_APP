@@ -41,13 +41,6 @@ private final BankAccountRepository bankAccountRepository;
 
 //        bankAccountRepository.saveAll(bankAccounts);
 
-        BankAccount bankAccount = new BankAccount();
-        bankAccount.setAccountHolderName("Salesforce Team");
-        bankAccount.setAccountNumber("BG65STHL614889Co13H03H");
-        bankAccount.setCardCVV("333");
-        bankAccount.setCardDate("12/33");
-        bankAccount.setBalance(10000);
-        bankAccount.setCardNumber("6502-6241-4114-1956-6083");
-        bankAccountRepository.save(bankAccount);
+
     }
 }
