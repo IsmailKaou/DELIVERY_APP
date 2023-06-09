@@ -19,6 +19,10 @@ export class ProductDetailsComponent implements OnInit {
     const productId = this.route.snapshot.paramMap.get('id');
     this.fetchDetails(productId);
   }
+  isCloudImg(imageURL: string): boolean {
+    // Assuming your local image paths have a specific prefix, e.g., 'local:'
+    return imageURL.startsWith('http');
+  }
 
   product: any;
   fetchDetails(productId) {

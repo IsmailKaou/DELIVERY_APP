@@ -14,7 +14,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.getCartDetails();
   }
-
+  isCloudImg(imageURL: string): boolean {
+    // Assuming your local image paths have a specific prefix, e.g., 'local:'
+    return imageURL.startsWith('http');
+  }
   getCartDetails() {
     this.productService.getCartDetails().subscribe(
       (res: any) => {

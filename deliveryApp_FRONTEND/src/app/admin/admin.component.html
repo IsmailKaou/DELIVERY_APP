@@ -70,7 +70,11 @@
                     <div>
                       <img
                         [src]="
-                          '../../../assets/products/' + product.name + '.jpeg'
+                          isCloudImg(product.imageURL)
+                            ? product.imageURL
+                            : '../../../assets/products/' +
+                              product.imageURL +
+                              '.jpeg'
                         "
                         class="rounded-lg"
                         alt="product"

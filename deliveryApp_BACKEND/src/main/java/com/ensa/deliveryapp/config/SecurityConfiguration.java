@@ -34,6 +34,7 @@ public class SecurityConfiguration {
                                 new AntPathRequestMatcher("/api/v1/auth/**"),
                                 new AntPathRequestMatcher("/api-docs/**"),
                                 new AntPathRequestMatcher("/products/getProducts/**"),
+                                new AntPathRequestMatcher("/upload"),
                                 new AntPathRequestMatcher("/products/product/**")
                                 ).permitAll()
 //                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())

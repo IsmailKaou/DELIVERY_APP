@@ -7,7 +7,11 @@
       <!-- Image gallery -->
       <div class="sm:rounded-lg bg-black">
         <img
-          [src]="'../../../assets/products/' + product.name + 'D.jpeg'"
+          [src]="
+            isCloudImg(product.imageURL)
+              ? product.imageURL
+              : '../../../assets/products/' + product.imageURL + '.jpeg'
+          "
           alt=""
           class="h-full w-full object-cover object-center"
         />

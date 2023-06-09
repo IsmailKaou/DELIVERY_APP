@@ -6,6 +6,7 @@ import com.ensa.deliveryapp.model.Product;
 import com.ensa.deliveryapp.repository.CategoryRepository;
 import com.ensa.deliveryapp.repository.ProductRepository;
 import lombok.Data;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,11 +27,7 @@ public class ProductService {
         return productRepository.findByName(name).get();
     }
     public List<Product> listAllProducts(){
-//        for (Product product: productRepository.findAll()
-//             ) {
-//            System.out.println(product.getPrice());
-//        }
-        return productRepository.findAll();
+        return productRepository.findAllByOrderByIdDesc();
     }
     public Product getProductById(Long id){
     return productRepository.findById(id).get();

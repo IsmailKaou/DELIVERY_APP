@@ -31,8 +31,6 @@ export class AdminComponent implements OnInit {
   forAdmin() {
     this.userService.forAdmin().subscribe(
       (res) => {
-        console.log('im here');
-        console.log(res);
         this.message = res;
       },
       (err) => {
@@ -64,6 +62,10 @@ export class AdminComponent implements OnInit {
     this.dialogRef.open(DeleteDialogComponent, {
       width: '60%',
     });
+  }
+  isCloudImg(imageURL: string): boolean {
+    // Assuming your local image paths have a specific prefix, e.g., 'local:'
+    return imageURL.startsWith('http');
   }
 
   openUpdateDialog(product) {

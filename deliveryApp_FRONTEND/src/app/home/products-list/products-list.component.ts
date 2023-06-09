@@ -12,6 +12,11 @@ export class ProductsListComponent implements OnInit {
     this.listAllProducts();
   }
   products: any[] = [];
+  isCloudImg(imageURL: string): boolean {
+    // Assuming your local image paths have a specific prefix, e.g., 'local:'
+    return imageURL.startsWith('http');
+  }
+
   listAllProducts() {
     this.productService.listProducts().subscribe(
       (products) => {

@@ -50,28 +50,27 @@ export class UpdateProductComponent {
       ),
     });
   }
+  productImage = UpdateProductComponent.product.imageURL;
   updateProduct() {
     const productName = this.form.get('productName').value;
-    const productImage = this.form.get('productImage').value;
+
     //const productCategory = this.form.get('productCategory').value;
     const productDescription = this.form.get('productDescription').value;
     const productPrice = this.form.get('productPrice').value;
     console.log(productName + 'is the name');
     const product = {
       name: productName,
-      imageURL: productImage,
+      imageURL: this.productImage,
       category: 1,
       price: productPrice,
       description: productDescription,
     };
-    console.log('Category 1');
     this.productService
       .updateProduct(UpdateProductComponent.productId, product)
       .subscribe(
         (response) => {
-          console.log(response);
           this.dialogRef.close();
-          window.location.reload();
+          //window.location.reload();
         },
         (error) => {
           console.log(error);
@@ -93,16 +92,16 @@ export class UpdateProductComponent {
   uploadFile() {
     if (this.selectedFile) {
       const formData: FormData = new FormData();
-      formData.append('file', this.selectedFile, this.selectedFile.name);
+      formData.append('image', this.selectedFile, this.selectedFile.name);
 
       this.http
-        .post(
-          'https://deliveryapp-production-4114.up.railway.app/api/uploadFile',
-          formData
-        )
+        .post('http://localhost:2000/upload', formData, {
+          responseType: 'text',
+        })
         .subscribe(
           (response) => {
-            console.log('File uploaded successfully', response);
+            this.productImage = response;
+            console.log('File uploaded successfully in this link', response);
           },
           (error) => {
             console.error('Error uploading file:', error);
