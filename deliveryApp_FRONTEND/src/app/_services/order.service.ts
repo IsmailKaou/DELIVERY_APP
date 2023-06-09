@@ -8,7 +8,7 @@ import { Order } from '../model/Order';
 })
 export class OrderService {
   constructor(private http: HttpClient) {}
-  api = 'http://localhost:8080/orders';
+  api = 'http://localhost:2000/orders';
   getOrder(orderId: string): Observable<Order> {
     return this.http.get<Order>(this.api + '/' + orderId);
   }
