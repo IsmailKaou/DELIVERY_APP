@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  api = 'http://localhost:2000';
+  api = 'https://deliveryapp-production-4114.up.railway.app';
   cartDetails: any[] = [];
   public emptyCart = true;
   requestHeader = new HttpHeaders({ 'No-Auth': 'True' });

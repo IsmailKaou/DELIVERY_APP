@@ -96,7 +96,10 @@ export class UpdateProductComponent {
       formData.append('file', this.selectedFile, this.selectedFile.name);
 
       this.http
-        .post('http://localhost:2000/api/uploadFile', formData)
+        .post(
+          'https://deliveryapp-production-4114.up.railway.app/api/uploadFile',
+          formData
+        )
         .subscribe(
           (response) => {
             console.log('File uploaded successfully', response);
